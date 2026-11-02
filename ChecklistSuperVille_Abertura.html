@@ -8,6 +8,8 @@
 <title>Checklist Abertura - Super Ville</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
+button,input,select,textarea{font-family:inherit;}
+
 :root {
     --sv-green:#34AD68; --sv-green-light:#e8f8ef;
     --sv-green-glow:rgba(52,173,104,0.25); --sv-black:#0d0d0d;
@@ -20,8 +22,8 @@
 /* SPLASH */
 #splash-screen{position:fixed;inset:0;background:var(--sv-black);display:flex;flex-direction:column;justify-content:center;align-items:center;gap:24px;z-index:9999;transition:opacity 0.8s ease-out,visibility 0.8s;}
 #splash-screen.hidden{opacity:0;visibility:hidden;}
-#splash-screen img{max-width:60%;height:auto;animation:pulseIn 1s ease-out;}
-.splash-bar{width:160px;height:3px;background:#222;border-radius:99px;overflow:hidden;}
+#splash-screen img{max-width:65%;width:260px;height:auto;display:block;margin:0 auto;animation:pulseIn 1s ease-out;}
+.splash-bar{width:200px;height:4px;background:#1a1a1a;border-radius:99px;overflow:hidden;}
 .splash-bar-fill{height:100%;width:0%;background:var(--sv-green);border-radius:99px;animation:loadBar 2.8s ease-in-out forwards;}
 @keyframes pulseIn{from{opacity:0;transform:scale(0.9)}to{opacity:1;transform:scale(1)}}
 @keyframes loadBar{0%{width:0%}80%{width:90%}100%{width:100%}}
@@ -30,7 +32,7 @@
 #tela-login{position:fixed;inset:0;background:#0d0d0d;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;z-index:8000;}
 #tela-login.oculta{display:none;}
 .login-box{background:#1a1a1a;border:1.5px solid #2a2a2a;border-radius:20px;padding:32px 28px;width:100%;max-width:400px;text-align:center;}
-.login-logo{width:110px;margin-bottom:18px;}
+.login-logo{width:100px;height:auto;display:block;margin:0 auto 16px auto;}
 .login-tag{color:var(--sv-green);font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:2px;font-family:'Space Mono',monospace;margin-bottom:6px;}
 .login-title{color:#fff;font-size:22px;font-weight:800;margin-bottom:4px;}
 .login-sub{color:#8e8e93;font-size:13px;margin-bottom:24px;}
@@ -990,7 +992,7 @@ function gerarRelatorioRondaHTML(nomeEnc, logoSrc) {
     });
 
     return '<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Ronda — Super Ville</title></head>' +
-        '<body style="background:#f0f2f5;font-family:Arial,sans-serif;margin:0;padding:16px;">' +
+        '<body style="background:#f0f2f5;font-family:DM Sans,Arial,sans-serif;margin:0;padding:16px;">' +
         '<div style="max-width:600px;margin:0 auto;">' +
         '<div style="background:#0d0d0d;border-radius:14px;padding:20px;margin-bottom:16px;text-align:center;">' +
         '<img src="' + logoSrc + '" style="width:90px;margin-bottom:12px;">' +

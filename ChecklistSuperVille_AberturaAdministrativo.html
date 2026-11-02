@@ -7,6 +7,8 @@
 <title>Checklist Abertura Administrativo - Super Ville</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
+button,input,select,textarea{font-family:inherit;}
+
 :root {
     --sv-green: #34AD68; --sv-green-light: #e8f8ef;
     --sv-green-glow: rgba(52,173,104,0.25); --sv-black: #0d0d0d;
@@ -18,8 +20,8 @@
 /* SPLASH */
 #splash { position:fixed; inset:0; background:var(--sv-black); display:flex; flex-direction:column; justify-content:center; align-items:center; gap:24px; z-index:9999; transition:opacity 0.8s; }
 #splash.hidden { opacity:0; visibility:hidden; }
-#splash img { max-width:60%; animation:pulseIn 1s ease-out; }
-.splash-bar { width:160px; height:3px; background:#222; border-radius:99px; overflow:hidden; }
+#splash img { max-width:65%;width:260px;height:auto;display:block;margin:0 auto;animation:pulseIn 1s ease-out; }
+.splash-bar { width:200px; height:4px; background:#1a1a1a; border-radius:99px; overflow:hidden; }
 .splash-fill { height:100%; background:var(--sv-green); border-radius:99px; animation:loadBar 2.8s ease-in-out forwards; }
 @keyframes pulseIn { from{opacity:0;transform:scale(0.9)} to{opacity:1;transform:scale(1)} }
 @keyframes loadBar { 0%{width:0%} 80%{width:90%} 100%{width:100%} }
@@ -28,7 +30,7 @@
 #tela-login { position:fixed; inset:0; background:#0d0d0d; display:flex; align-items:center; justify-content:center; padding:24px; z-index:8000; }
 #tela-login.oculta { display:none; }
 .login-box { background:#1a1a1a; border:1.5px solid #2a2a2a; border-radius:20px; padding:32px 28px; width:100%; max-width:400px; text-align:center; }
-.login-box img { width:110px; margin-bottom:18px; }
+.login-box img { width:100px; height:auto; display:block; margin:0 auto 16px auto; }
 .login-tag { color:var(--sv-green); font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:2px; font-family:'Space Mono',monospace; margin-bottom:6px; }
 .login-title { color:#fff; font-size:22px; font-weight:800; margin-bottom:4px; }
 .login-sub { color:#8e8e93; font-size:13px; margin-bottom:24px; }
@@ -125,7 +127,7 @@ body.loading .wrap { display:none; }
 .mb-emaild { background:#f3e5f5; color:#7b1fa2; }
 .mb-i { font-size:24px; }
 .mb-l { font-size:10px; text-transform:uppercase; letter-spacing:0.5px; font-family:'Space Mono',monospace; }
-.modal-close { width:100%; padding:13px; border-radius:10px; border:1.5px solid var(--border); background:transparent; font-size:13px; font-weight:700; color:var(--muted); cursor:pointer; font-family:'DM Sans',monospace; margin-top:8px; }
+.modal-close { width:100%; padding:13px; border-radius:10px; border:1.5px solid var(--border); background:transparent; font-size:13px; font-weight:700; color:var(--muted); cursor:pointer; font-family:'DM Sans',sans-serif; margin-top:8px; }
 
 .btn-finish { width:100%; padding:18px; background:var(--sv-black); color:#fff; border:none; border-radius:12px; font-size:15px; font-weight:800; cursor:pointer; font-family:'DM Sans',sans-serif; margin-top:16px; transition:all 0.2s; }
 .btn-finish:active { transform:scale(0.97); }
