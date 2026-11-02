@@ -2,6 +2,8 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
+<meta name="theme-color" content="#0d0d0d">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Checklist Abertura - Super Ville</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -144,6 +146,9 @@ body.loading .wrap{display:none;}
 .modal-btn-icon{font-size:26px;}
 .modal-btn-label{font-size:11px;text-transform:uppercase;letter-spacing:0.5px;font-family:'Space Mono',monospace;}
 .modal-close{width:100%;padding:13px;border-radius:10px;border:1.5px solid var(--border);background:transparent;font-size:13px;font-weight:700;color:var(--muted);cursor:pointer;font-family:'DM Sans',sans-serif;transition:0.2s;}
+
+.text[data-leg]::after{content:attr(data-leg);display:block;font-size:11.5px;font-weight:400;color:var(--muted);margin-top:4px;line-height:1.45;}
+.item.done .text::after{display:none;}
 </style>
 
 
@@ -255,6 +260,12 @@ body.loading .wrap{display:none;}
         <input type="text" id="resp-nome" placeholder="Quem está realizando a abertura?">
     </div>
 
+    <div id="banner-rascunho" style="display:none;background:#1a3c34;border-left:4px solid #34AD68;border-radius:10px;padding:12px 16px;margin:0 0 12px;align-items:center;gap:12px;">
+        <span style="font-size:20px;">&#128221;</span>
+        <div style="flex:1;"><div style="color:#34AD68;font-size:13px;font-weight:700;">Progresso recuperado!</div><div style="color:#8e8e93;font-size:12px;margin-top:2px;">Seu checklist foi salvo e continua de onde voc&#234; parou.</div></div>
+        <button onclick="document.getElementById('banner-rascunho').style.display='none'" style="background:none;border:none;color:#8e8e93;font-size:18px;cursor:pointer;">&#10005;</button>
+    </div>
+
     <div class="progress-wrap">
         <div class="progress-bar-bg"><div class="progress-bar-fill" id="prog-abertura" style="width:0%"></div></div>
         <div class="progress-label" id="prog-label-abertura">0 / 0</div>
@@ -263,9 +274,9 @@ body.loading .wrap{display:none;}
     <div id="panel-abertura">
 
         <div class="section-title">🕐 Antes da Abertura</div>
-        <div class="item" onclick="tog(this)"><div class="cb"></div><div class="text">Todas as luzes do setor acesas e funcionando?</div></div>
-        <div class="item" onclick="tog(this)"><div class="cb"></div><div class="text">Preços e placas promocionais conferidos e posicionados nas gôndolas?</div></div>
-        <div class="item" onclick="tog(this)"><div class="cb"></div><div class="text">Todos os repositores do turno estão presentes e prontos?</div></div>
+        <div class="item" onclick="tog(this)"><div class="cb"></div><div class="text" data-leg="Percorra o setor e confira se todas as lâmpadas estão acesas. Lâmpada queimada: avise a manutenção.">Todas as luzes do setor acesas e funcionando?</div></div>
+        <div class="item" onclick="tog(this)"><div class="cb"></div><div class="text" data-leg="Compare as placas das gôndolas com o relatório de preços e promoções. Placa errada ou faltando: corrija antes de abrir.">Preços e placas promocionais conferidos e posicionados nas gôndolas?</div></div>
+        <div class="item" onclick="tog(this)"><div class="cb"></div><div class="text" data-leg="Confirme se a equipe do turno chegou, está uniformizada e já posicionada nos corredores.">Todos os repositores do turno estão presentes e prontos?</div></div>
 
         <div class="section-title">🏃 Ronda Inicial</div>
         <div class="ronda-wrap" id="ronda-wrap">
@@ -281,7 +292,7 @@ body.loading .wrap{display:none;}
                     </label>
                 </div>
                 <div class="foto-preview-wrap" id="fotos-cor1"></div>
-                <textarea class="corredor-obs" id="obs-cor1" placeholder="Observações: organização, fluxo, preços..."></textarea>
+                <textarea class="corredor-obs" id="obs-cor1" oninput="salvarRascunho()" placeholder="Observações: organização, fluxo, preços..."></textarea>
             </div>
             <div class="corredor-item" id="wrap-cor2">
                 <div class="corredor-header">
@@ -293,7 +304,7 @@ body.loading .wrap{display:none;}
                     </label>
                 </div>
                 <div class="foto-preview-wrap" id="fotos-cor2"></div>
-                <textarea class="corredor-obs" id="obs-cor2" placeholder="Observações: temperatura, ruptura, organização..."></textarea>
+                <textarea class="corredor-obs" id="obs-cor2" oninput="salvarRascunho()" placeholder="Observações: temperatura, ruptura, organização..."></textarea>
             </div>
             <div class="corredor-item" id="wrap-cor3">
                 <div class="corredor-header">
@@ -305,7 +316,7 @@ body.loading .wrap{display:none;}
                     </label>
                 </div>
                 <div class="foto-preview-wrap" id="fotos-cor3"></div>
-                <textarea class="corredor-obs" id="obs-cor3" placeholder="Observações: exposição, validade, organização..."></textarea>
+                <textarea class="corredor-obs" id="obs-cor3" oninput="salvarRascunho()" placeholder="Observações: exposição, validade, organização..."></textarea>
             </div>
             <div class="corredor-item" id="wrap-cor4">
                 <div class="corredor-header">
@@ -317,7 +328,7 @@ body.loading .wrap{display:none;}
                     </label>
                 </div>
                 <div class="foto-preview-wrap" id="fotos-cor4"></div>
-                <textarea class="corredor-obs" id="obs-cor4" placeholder="Observações: precificação, ruptura..."></textarea>
+                <textarea class="corredor-obs" id="obs-cor4" oninput="salvarRascunho()" placeholder="Observações: precificação, ruptura..."></textarea>
             </div>
             <div class="corredor-item" id="wrap-cor5">
                 <div class="corredor-header">
@@ -329,7 +340,7 @@ body.loading .wrap{display:none;}
                     </label>
                 </div>
                 <div class="foto-preview-wrap" id="fotos-cor5"></div>
-                <textarea class="corredor-obs" id="obs-cor5" placeholder="Observações: ruptura, organização, limpeza..."></textarea>
+                <textarea class="corredor-obs" id="obs-cor5" oninput="salvarRascunho()" placeholder="Observações: ruptura, organização, limpeza..."></textarea>
             </div>
             <div class="corredor-item" id="wrap-cor6">
                 <div class="corredor-header">
@@ -341,7 +352,7 @@ body.loading .wrap{display:none;}
                     </label>
                 </div>
                 <div class="foto-preview-wrap" id="fotos-cor6"></div>
-                <textarea class="corredor-obs" id="obs-cor6" placeholder="Observações: ruptura, organização..."></textarea>
+                <textarea class="corredor-obs" id="obs-cor6" oninput="salvarRascunho()" placeholder="Observações: ruptura, organização..."></textarea>
             </div>
             <div class="corredor-item" id="wrap-cor7">
                 <div class="corredor-header">
@@ -353,7 +364,7 @@ body.loading .wrap{display:none;}
                     </label>
                 </div>
                 <div class="foto-preview-wrap" id="fotos-cor7"></div>
-                <textarea class="corredor-obs" id="obs-cor7" placeholder="Observações: validade, ruptura, organização..."></textarea>
+                <textarea class="corredor-obs" id="obs-cor7" oninput="salvarRascunho()" placeholder="Observações: validade, ruptura, organização..."></textarea>
             </div>
             <div class="corredor-item" id="wrap-cor8">
                 <div class="corredor-header">
@@ -365,7 +376,7 @@ body.loading .wrap{display:none;}
                     </label>
                 </div>
                 <div class="foto-preview-wrap" id="fotos-cor8"></div>
-                <textarea class="corredor-obs" id="obs-cor8" placeholder="Observações: validade, organização..."></textarea>
+                <textarea class="corredor-obs" id="obs-cor8" oninput="salvarRascunho()" placeholder="Observações: validade, organização..."></textarea>
             </div>
             <div class="corredor-item" id="wrap-cor9">
                 <div class="corredor-header">
@@ -377,7 +388,7 @@ body.loading .wrap{display:none;}
                     </label>
                 </div>
                 <div class="foto-preview-wrap" id="fotos-cor9"></div>
-                <textarea class="corredor-obs" id="obs-cor9" placeholder="Observações: ruptura, vazamentos, organização..."></textarea>
+                <textarea class="corredor-obs" id="obs-cor9" oninput="salvarRascunho()" placeholder="Observações: ruptura, vazamentos, organização..."></textarea>
             </div>
             <div class="corredor-item" id="wrap-cor10">
                 <div class="corredor-header">
@@ -389,7 +400,7 @@ body.loading .wrap{display:none;}
                     </label>
                 </div>
                 <div class="foto-preview-wrap" id="fotos-cor10"></div>
-                <textarea class="corredor-obs" id="obs-cor10" placeholder="Observações: ruptura, precificação..."></textarea>
+                <textarea class="corredor-obs" id="obs-cor10" oninput="salvarRascunho()" placeholder="Observações: ruptura, precificação..."></textarea>
             </div>
             <div class="corredor-item" id="wrap-cor11">
                 <div class="corredor-header">
@@ -401,7 +412,7 @@ body.loading .wrap{display:none;}
                     </label>
                 </div>
                 <div class="foto-preview-wrap" id="fotos-cor11"></div>
-                <textarea class="corredor-obs" id="obs-cor11" placeholder="Observações: temperatura, ruptura..."></textarea>
+                <textarea class="corredor-obs" id="obs-cor11" oninput="salvarRascunho()" placeholder="Observações: temperatura, ruptura..."></textarea>
             </div>
             <div class="corredor-item" id="wrap-cor12">
                 <div class="corredor-header">
@@ -413,7 +424,7 @@ body.loading .wrap{display:none;}
                     </label>
                 </div>
                 <div class="foto-preview-wrap" id="fotos-cor12"></div>
-                <textarea class="corredor-obs" id="obs-cor12" placeholder="Observações: ruptura, validade, organização..."></textarea>
+                <textarea class="corredor-obs" id="obs-cor12" oninput="salvarRascunho()" placeholder="Observações: ruptura, validade, organização..."></textarea>
             </div>
             <div class="corredor-item" id="wrap-cor13">
                 <div class="corredor-header">
@@ -425,7 +436,7 @@ body.loading .wrap{display:none;}
                     </label>
                 </div>
                 <div class="foto-preview-wrap" id="fotos-cor13"></div>
-                <textarea class="corredor-obs" id="obs-cor13" placeholder="Observações: temperatura, ruptura, empilhamento..."></textarea>
+                <textarea class="corredor-obs" id="obs-cor13" oninput="salvarRascunho()" placeholder="Observações: temperatura, ruptura, empilhamento..."></textarea>
             </div>
             <div class="corredor-item" id="wrap-cor14">
                 <div class="corredor-header">
@@ -437,7 +448,7 @@ body.loading .wrap{display:none;}
                     </label>
                 </div>
                 <div class="foto-preview-wrap" id="fotos-cor14"></div>
-                <textarea class="corredor-obs" id="obs-cor14" placeholder="Observações: abastecimento, visual, precificação..."></textarea>
+                <textarea class="corredor-obs" id="obs-cor14" oninput="salvarRascunho()" placeholder="Observações: abastecimento, visual, precificação..."></textarea>
             </div>
             <div class="corredor-item" id="wrap-cor15">
                 <div class="corredor-header">
@@ -449,7 +460,7 @@ body.loading .wrap{display:none;}
                     </label>
                 </div>
                 <div class="foto-preview-wrap" id="fotos-cor15"></div>
-                <textarea class="corredor-obs" id="obs-cor15" placeholder="Observações: integridade, ruptura, limpeza..."></textarea>
+                <textarea class="corredor-obs" id="obs-cor15" oninput="salvarRascunho()" placeholder="Observações: integridade, ruptura, limpeza..."></textarea>
             </div>
             <button class="btn-ronda-ok" id="btn-ronda-ok" onclick="okRonda()">✔ Ronda Concluída — Enviar ao Gerente</button>
         </div>
@@ -485,10 +496,10 @@ body.loading .wrap{display:none;}
         </div>
 
         <div class="section-title">📋 Operação em Andamento</div>
-        <div class="item" onclick="tog(this)"><div class="cb"></div><div class="text">Rupturas identificadas e marcadas para reposição imediata?</div></div>
-        <div class="item" onclick="tog(this)"><div class="cb"></div><div class="text">Pontas de gôndola organizadas, sem buracos e bem expostas?</div></div>
-        <div class="item" onclick="tog(this)"><div class="cb"></div><div class="text">Corredores limpos, sem sujeira, papelão ou obstáculos no piso?</div></div>
-        <div class="item" onclick="tog(this)"><div class="cb"></div><div class="text">Equipe do 2º período confirmada, alinhada e pronta para iniciar?</div></div>
+        <div class="item" onclick="tog(this)"><div class="cb"></div><div class="text" data-leg="Veja as gôndolas vazias, anote os produtos em falta e mande repor na hora. O que não tiver no estoque, registre.">Rupturas identificadas e marcadas para reposição imediata?</div></div>
+        <div class="item" onclick="tog(this)"><div class="cb"></div><div class="text" data-leg="Pontas cheias, sem buracos, com produtos de frente e preço visível.">Pontas de gôndola organizadas, sem buracos e bem expostas?</div></div>
+        <div class="item" onclick="tog(this)"><div class="cb"></div><div class="text" data-leg="Piso sem sujeira, caixas de papelão ou qualquer coisa que atrapalhe a passagem do cliente.">Corredores limpos, sem sujeira, papelão ou obstáculos no piso?</div></div>
+        <div class="item" onclick="tog(this)"><div class="cb"></div><div class="text" data-leg="Confirme com a equipe do próximo período que todos estão cientes e prontos para assumir.">Equipe do 2º período confirmada, alinhada e pronta para iniciar?</div></div>
 
         <button class="btn btn-finish" onclick="finalizar()">✔ Finalizar Abertura</button>
     </div>
@@ -537,6 +548,7 @@ async function fazerLogin() {
         const nomeInput = document.getElementById('resp-nome');
         if (nomeInput && !nomeInput.value) nomeInput.value = user.nome;
         document.getElementById('login-erro').classList.remove('show');
+        setTimeout(function() { restaurarRascunho(); }, 400);
         registrarLog('login', user.nome, 'Acessou o checklist de abertura — Mercearia');
     } else {
         document.getElementById('login-erro').classList.add('show');
@@ -562,6 +574,7 @@ function verificarSessao() {
         document.getElementById('user-badge').classList.add('visivel');
         const nomeInput = document.getElementById('resp-nome');
         if (nomeInput && !nomeInput.value) nomeInput.value = user.nome;
+        setTimeout(function() { restaurarRascunho(); }, 300);
     }
 }
 
@@ -575,7 +588,208 @@ async function registrarLog(tipo, usuario, detalhe) {
 function tog(el) {
     el.classList.toggle('done');
     atualizarProgresso();
+    salvarRascunho();
 }
+
+// ─── RASCUNHO LOCAL ───
+var RASCUNHO_KEY = 'sv_abertura_rascunho_v3';
+
+// Comprime imagem para armazenar no localStorage (bem pequena)
+function comprimirParaStorage(dataUrl, cb) {
+    var img = new Image();
+    img.onload = function() {
+        var canvas = document.createElement('canvas');
+        var maxW = 180, maxH = 180, w = img.width, h = img.height;
+        if (w > maxW || h > maxH) { var r = Math.min(maxW/w, maxH/h); w = Math.round(w*r); h = Math.round(h*r); }
+        canvas.width = w; canvas.height = h;
+        canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+        cb(canvas.toDataURL('image/jpeg', 0.3));
+    };
+    img.src = dataUrl;
+}
+
+function salvarRascunho() {
+    var hoje = new Date().toLocaleDateString('pt-BR');
+    var rascunho = {
+        v: 3,
+        data: hoje,
+        nome: document.getElementById('resp-nome') ? document.getElementById('resp-nome').value : '',
+        wppGestor:   document.getElementById('wpp-gestor')   ? document.getElementById('wpp-gestor').value   : '',
+        emailGestor: document.getElementById('email-gestor') ? document.getElementById('email-gestor').value : '',
+        wppRonda:    document.getElementById('wpp-ronda')    ? document.getElementById('wpp-ronda').value    : '',
+        emailRonda:  document.getElementById('email-ronda')  ? document.getElementById('email-ronda').value  : '',
+        wppDiretor:  document.getElementById('wpp-diretor')  ? document.getElementById('wpp-diretor').value  : '',
+        emailDiretor:document.getElementById('email-diretor')? document.getElementById('email-diretor').value: '',
+        itensAbertura: [],
+        itensFinal: [],
+        rondaObs: {},
+        rondaFotosSmall: {},
+        rondaConcluida: document.getElementById('ronda-wrap') ? document.getElementById('ronda-wrap').classList.contains('ok') : false,
+        rondaLink: document.getElementById('link-input') ? document.getElementById('link-input').value : '',
+        rondaWppHref: document.getElementById('ronda-wpp-btn') ? document.getElementById('ronda-wpp-btn').href : '',
+        rondaEmailHref: document.getElementById('ronda-email-btn') ? document.getElementById('ronda-email-btn').href : ''
+    };
+    // Itens abertura
+    var panel = document.getElementById('panel-abertura');
+    if (panel) panel.querySelectorAll('.item').forEach(function(el) { rascunho.itensAbertura.push(el.classList.contains('done')); });
+    // Itens final
+    var panelFinal = document.getElementById('panel-final');
+    if (panelFinal) panelFinal.querySelectorAll('.item').forEach(function(el) { rascunho.itensFinal.push(el.classList.contains('done')); });
+    // Obs da ronda
+    ids.forEach(function(id) {
+        var el = document.getElementById('obs-' + id);
+        if (el) rascunho.rondaObs[id] = el.value;
+    });
+    // Fotos da ronda — guardar versão pequena
+    var corIds = Object.keys(fotosData);
+    if (corIds.length === 0) {
+        _salvarRascunhoJSON(rascunho);
+        return;
+    }
+    var total = 0;
+    corIds.forEach(function(cid) { total += (fotosData[cid] || []).filter(function(f){return f!==null;}).length; });
+    if (total === 0) { _salvarRascunhoJSON(rascunho); return; }
+    var processadas = 0;
+    corIds.forEach(function(cid) {
+        var fotos = (fotosData[cid] || []).filter(function(f){return f!==null;});
+        if (fotos.length === 0) { return; }
+        rascunho.rondaFotosSmall[cid] = [];
+        fotos.forEach(function(f) {
+            comprimirParaStorage(f.dataUrl || f, function(small) {
+                rascunho.rondaFotosSmall[cid].push(small);
+                processadas++;
+                if (processadas === total) _salvarRascunhoJSON(rascunho);
+            });
+        });
+    });
+}
+
+function _salvarRascunhoJSON(rascunho) {
+    try {
+        var json = JSON.stringify(rascunho);
+        localStorage.setItem(RASCUNHO_KEY, json);
+    } catch(e) {
+        // Se exceder o limite, salvar sem fotos
+        try {
+            rascunho.rondaFotosSmall = {};
+            localStorage.setItem(RASCUNHO_KEY, JSON.stringify(rascunho));
+        } catch(e2) {}
+    }
+}
+
+function restaurarRascunho() {
+    try {
+        var raw = localStorage.getItem(RASCUNHO_KEY);
+        if (!raw) return false;
+        var r = JSON.parse(raw);
+        if (!r || r.v !== 3) return false;
+        // Se for um dia diferente, limpar e começar do zero
+        var hoje = new Date().toLocaleDateString('pt-BR');
+        if (r.data && r.data !== hoje) {
+            localStorage.removeItem(RASCUNHO_KEY);
+            return false;
+        }
+        // Campos de config
+        ['resp-nome','wpp-gestor','email-gestor','wpp-ronda','email-ronda','wpp-diretor','email-diretor'].forEach(function(id, i) {
+            var keys = ['nome','wppGestor','emailGestor','wppRonda','emailRonda','wppDiretor','emailDiretor'];
+            var el = document.getElementById(id);
+            if (el && r[keys[i]]) el.value = r[keys[i]];
+        });
+        // Itens abertura
+        var panel = document.getElementById('panel-abertura');
+        if (panel && r.itensAbertura && r.itensAbertura.length > 0) {
+            panel.querySelectorAll('.item').forEach(function(el, i) { if (r.itensAbertura[i]) el.classList.add('done'); });
+        }
+        // Itens final
+        var panelFinal = document.getElementById('panel-final');
+        if (panelFinal && r.itensFinal && r.itensFinal.length > 0) {
+            panelFinal.querySelectorAll('.item').forEach(function(el, i) { if (r.itensFinal[i]) el.classList.add('done'); });
+        }
+        // Obs da ronda
+        ids.forEach(function(id) {
+            if (r.rondaObs && r.rondaObs[id] !== undefined) {
+                var el = document.getElementById('obs-' + id);
+                if (el) el.value = r.rondaObs[id];
+            }
+        });
+        // Fotos da ronda — restaurar thumbnails
+        if (r.rondaFotosSmall) {
+            Object.keys(r.rondaFotosSmall).forEach(function(cid) {
+                var fotos = r.rondaFotosSmall[cid];
+                if (!fotos || fotos.length === 0) return;
+                if (!fotosData[cid]) fotosData[cid] = [];
+                var wrap = document.getElementById('fotos-' + cid);
+                fotos.forEach(function(dataUrl) {
+                    var ix = fotosData[cid].length;
+                    fotosData[cid].push({ dataUrl: dataUrl });
+                    if (wrap) {
+                        var thumbWrap = document.createElement('div');
+                        thumbWrap.className = 'foto-thumb-wrap';
+                        var imgEl = document.createElement('img');
+                        imgEl.className = 'foto-thumb';
+                        imgEl.src = dataUrl;
+                        imgEl.onclick = function() { abrirLightbox(dataUrl); };
+                        var del = document.createElement('button');
+                        del.className = 'foto-del';
+                        del.textContent = '\u2715';
+                        del.onclick = (function(i2) { return function() { fotosData[cid][i2] = null; thumbWrap.remove(); atualizarIconeFoto(cid); salvarRascunho(); }; })(ix);
+                        thumbWrap.appendChild(imgEl);
+                        thumbWrap.appendChild(del);
+                        wrap.appendChild(thumbWrap);
+                    }
+                    atualizarIconeFoto(cid);
+                });
+            });
+        }
+        // Restaurar estado da ronda concluída
+        if (r.rondaConcluida) {
+            var wrap = document.getElementById('ronda-wrap');
+            var btn = document.getElementById('btn-ronda-ok');
+            var sendSection = document.getElementById('ronda-send-section');
+            if (wrap) wrap.classList.add('ok');
+            if (btn) { btn.classList.add('ok'); btn.innerHTML = '&#10004; Ronda Confirmada!'; }
+            if (sendSection) sendSection.classList.add('visible');
+            // Restaurar link e botões
+            if (r.rondaLink) {
+                var linkInput = document.getElementById('link-input');
+                var linkBox = document.getElementById('link-box');
+                if (linkInput) linkInput.value = r.rondaLink;
+                if (linkBox) linkBox.style.display = 'block';
+                var salvandoBox = document.getElementById('salvando-box');
+                if (salvandoBox) salvandoBox.style.display = 'none';
+            }
+            if (r.rondaWppHref) {
+                var btnWpp = document.getElementById('ronda-wpp-btn');
+                if (btnWpp) btnWpp.href = r.rondaWppHref;
+            }
+            if (r.rondaEmailHref) {
+                var btnEmail = document.getElementById('ronda-email-btn');
+                if (btnEmail) btnEmail.href = r.rondaEmailHref;
+            }
+        }
+        atualizarProgresso();
+        mostrarBannerRascunho();
+        return true;
+    } catch(e) { console.error('Erro restaurar rascunho:', e); return false; }
+}
+
+function limparRascunho() {
+    try { localStorage.removeItem(RASCUNHO_KEY); } catch(e) {}
+}
+
+function mostrarBannerRascunho() {
+    var banner = document.getElementById('banner-rascunho');
+    if (banner) banner.style.display = 'flex';
+}
+
+
+
+// Salva o rascunho também ao digitar nos campos de configuração
+window.addEventListener('load', function() {
+    document.querySelectorAll('.config-box input').forEach(function(el) {
+        el.addEventListener('input', function() { try { salvarRascunho(); } catch(e) {} });
+    });
+});
 
 function atualizarProgresso() {
     const panel = document.getElementById('panel-abertura');
@@ -640,11 +854,12 @@ function adicionarFoto(cid, input) {
             var del = document.createElement('button');
             del.className = 'foto-del';
             del.textContent = '✕';
-            del.onclick = function() { fotosData[cid][idx] = null; thumbWrap.remove(); atualizarIconeFoto(cid); };
+            del.onclick = function() { fotosData[cid][idx] = null; thumbWrap.remove(); atualizarIconeFoto(cid); salvarRascunho(); };
             thumbWrap.appendChild(img);
             thumbWrap.appendChild(del);
             wrap.appendChild(thumbWrap);
             atualizarIconeFoto(cid);
+            setTimeout(salvarRascunho, 500);
         });
     };
     reader.readAsDataURL(file);
@@ -674,6 +889,7 @@ function okRonda() {
         btn.classList.remove('ok');
         btn.textContent = '✔ Ronda Concluída — Enviar ao Gerente';
         sendSection.classList.remove('visible');
+        salvarRascunho();
         return;
     }
 
@@ -741,6 +957,7 @@ function okRonda() {
             var emailEnc = document.getElementById('email-ronda') ? document.getElementById('email-ronda').value : '';
             document.getElementById('ronda-wpp-btn').href = wppEnc ? 'https://wa.me/' + wppEnc + '?text=' + encodeURIComponent(msgLink) : 'https://wa.me/?text=' + encodeURIComponent(msgLink);
             document.getElementById('ronda-email-btn').href = 'mailto:' + emailEnc + '?subject=' + encodeURIComponent('[RONDA] Super Ville') + '&body=' + encodeURIComponent(msgLink);
+            salvarRascunho();
         } else {
             document.getElementById('salvando-box').innerHTML = '<span style="color:#ff453a;font-size:13px;font-weight:700;">&#9888;&#65039; Erro ao salvar. Verifique sua conexao.</span>';
             document.getElementById('salvando-box').style.display = 'block';
