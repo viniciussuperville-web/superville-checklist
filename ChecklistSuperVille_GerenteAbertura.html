@@ -2,13 +2,17 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+
 <meta name="theme-color" content="#0d0d0d">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Checklist Gerente - Super Ville</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
 button,input,select,textarea{font-family:inherit;}
+#splash img,#splash-screen img,.header-logo-img,.login-logo,.login-box img,.brand-header img,header img,.hdr img{mix-blend-mode:lighten;}
 
 :root {
     --sv-green:#34AD68; --sv-green-light:#e8f8ef;
@@ -37,20 +41,20 @@ button,input,select,textarea{font-family:inherit;}
 .login-title{color:#fff;font-size:22px;font-weight:800;margin-bottom:4px;}
 .login-sub{color:#8e8e93;font-size:13px;margin-bottom:24px;}
 .login-label{display:block;text-align:left;font-size:10px;color:#8e8e93;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;font-family:'Space Mono',monospace;margin-bottom:6px;margin-top:14px;}
-.login-input{width:100%;padding:13px 16px;border-radius:10px;border:1.5px solid #2a2a2a;background:#111;font-size:15px;font-family:'DM Sans',sans-serif;color:#fff;outline:none;transition:border-color 0.2s;box-sizing:border-box;}
+.login-input{width:100%;padding:13px 16px;border-radius:10px;border:1.5px solid #2a2a2a;background:#111;font-size:15px;font-family:'Montserrat',sans-serif;color:#fff;outline:none;transition:border-color 0.2s;box-sizing:border-box;}
 .login-input:focus{border-color:var(--sv-green);}
 .login-input::placeholder{color:#555;}
-.btn-login{width:100%;margin-top:20px;padding:16px;background:var(--sv-green);color:#fff;border:none;border-radius:12px;font-size:15px;font-weight:800;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.2s;}
+.btn-login{width:100%;margin-top:20px;padding:16px;background:var(--sv-green);color:#fff;border:none;border-radius:12px;font-size:15px;font-weight:800;cursor:pointer;font-family:'Montserrat',sans-serif;transition:all 0.2s;}
 .btn-login:active{transform:scale(0.97);}
 .login-erro{color:#ff453a;font-size:13px;margin-top:10px;display:none;}
 .login-erro.show{display:block;}
 .user-badge{position:fixed;top:12px;right:12px;z-index:7999;background:#1a1a1a;border:1.5px solid #2a2a2a;border-radius:10px;padding:7px 12px;display:none;align-items:center;gap:8px;}
 .user-badge.visivel{display:flex;}
 .user-badge-nome{color:#fff;font-size:12px;font-weight:700;}
-.btn-sair{background:transparent;border:none;color:#8e8e93;font-size:11px;cursor:pointer;font-family:'DM Sans',sans-serif;padding:0;margin-left:4px;}
+.btn-sair{background:transparent;border:none;color:#8e8e93;font-size:11px;cursor:pointer;font-family:'Montserrat',sans-serif;padding:0;margin-left:4px;}
 .btn-sair:hover{color:#ff453a;}
 
-body{background:var(--bg);font-family:'DM Sans',sans-serif;color:var(--text);min-height:100vh;}
+body{background:var(--bg);font-family:'Montserrat',sans-serif;color:var(--text);min-height:100vh;}
 body.loading .wrap{display:none;}
 .wrap{padding:16px;max-width:600px;margin:0 auto;}
 
@@ -64,7 +68,7 @@ body.loading .wrap{display:none;}
 
 .config-box{background:var(--card);padding:16px;border-radius:var(--radius);margin-bottom:16px;border:1px solid var(--border);}
 .config-box label{display:block;font-size:10px;color:var(--muted);margin-bottom:5px;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;font-family:'Space Mono',monospace;}
-.config-box input{width:100%;padding:11px 14px;border-radius:8px;border:1.5px solid var(--border);margin-bottom:12px;font-size:14px;font-family:'DM Sans',sans-serif;color:var(--text);background:var(--bg);transition:border-color 0.2s;}
+.config-box input{width:100%;padding:11px 14px;border-radius:8px;border:1.5px solid var(--border);margin-bottom:12px;font-size:14px;font-family:'Montserrat',sans-serif;color:var(--text);background:var(--bg);transition:border-color 0.2s;}
 .config-box input:last-child{margin-bottom:0;}
 .config-box input:focus{outline:none;border-color:var(--sv-green);background:var(--sv-green-light);}
 .config-box input[readonly]{color:var(--muted);cursor:not-allowed;}
@@ -104,10 +108,10 @@ body.loading .wrap{display:none;}
 .foto-thumb-wrap{position:relative;}
 .foto-thumb{width:72px;height:72px;object-fit:cover;border-radius:8px;border:2px solid var(--border);display:block;cursor:pointer;}
 .foto-del{position:absolute;top:-6px;right:-6px;background:#ff3b30;color:#fff;border:none;border-radius:50%;width:20px;height:20px;font-size:12px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:1;}
-.corredor-obs{width:100%;border:none;border-top:1px solid var(--border);background:transparent;padding:10px 14px;font-size:13px;font-family:'DM Sans',sans-serif;color:var(--text);resize:none;min-height:52px;box-sizing:border-box;outline:none;}
+.corredor-obs{width:100%;border:none;border-top:1px solid var(--border);background:transparent;padding:10px 14px;font-size:13px;font-family:'Montserrat',sans-serif;color:var(--text);resize:none;min-height:52px;box-sizing:border-box;outline:none;}
 .corredor-obs::placeholder{color:var(--muted);}
-.btn-ronda-ok{width:100%;margin-top:12px;padding:16px;background:var(--sv-black);color:#fff;border:none;border-radius:12px;font-size:15px;font-weight:800;cursor:pointer;font-family:'DM Sans',sans-serif;letter-spacing:0.5px;transition:all 0.2s;}
-.btn.btn-ronda{width:100%;margin-top:12px;padding:16px;background:#0d0d0d !important;color:#fff !important;border:none;border-radius:12px;font-size:15px;font-weight:800;cursor:pointer;font-family:'DM Sans',sans-serif;text-transform:uppercase;letter-spacing:0.5px;transition:all 0.2s;}
+.btn-ronda-ok{width:100%;margin-top:12px;padding:16px;background:var(--sv-black);color:#fff;border:none;border-radius:12px;font-size:15px;font-weight:800;cursor:pointer;font-family:'Montserrat',sans-serif;letter-spacing:0.5px;transition:all 0.2s;}
+.btn.btn-ronda{width:100%;margin-top:12px;padding:16px;background:#0d0d0d !important;color:#fff !important;border:none;border-radius:12px;font-size:15px;font-weight:800;cursor:pointer;font-family:'Montserrat',sans-serif;text-transform:uppercase;letter-spacing:0.5px;transition:all 0.2s;}
 .btn.btn-ronda:active{transform:scale(0.97);}
 .btn.btn-ronda.ok{background:#34AD68 !important;}
 .btn-ronda-ok:active{transform:scale(0.97);}
@@ -119,7 +123,7 @@ body.loading .wrap{display:none;}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
 .ronda-send-title{color:var(--sv-green);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;font-family:'Space Mono',monospace;margin-bottom:10px;}
 .ronda-send-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
-.ronda-send-btn{padding:14px 12px;border-radius:10px;font-size:13px;font-weight:700;border:none;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:5px;transition:all 0.2s;font-family:'DM Sans',sans-serif;text-decoration:none;}
+.ronda-send-btn{padding:14px 12px;border-radius:10px;font-size:13px;font-weight:700;border:none;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:5px;transition:all 0.2s;font-family:'Montserrat',sans-serif;text-decoration:none;}
 .ronda-send-btn:active{transform:scale(0.96);}
 .ronda-send-btn-wpp{background:#e9faf0;color:var(--wpp-dark);}
 .ronda-send-btn-email{background:#f0f0f5;color:var(--sv-black);}
@@ -132,7 +136,7 @@ body.loading .wrap{display:none;}
 .lightbox img{max-width:92vw;max-height:88vh;border-radius:12px;object-fit:contain;}
 .lightbox-close{position:absolute;top:20px;right:20px;background:#fff;border:none;border-radius:50%;width:36px;height:36px;font-size:18px;cursor:pointer;font-weight:700;}
 
-.btn{padding:16px;border-radius:12px;font-size:14px;font-weight:800;border:none;cursor:pointer;text-transform:uppercase;letter-spacing:0.5px;text-align:center;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:8px;transition:all 0.2s;font-family:'DM Sans',sans-serif;}
+.btn{padding:16px;border-radius:12px;font-size:14px;font-weight:800;border:none;cursor:pointer;text-transform:uppercase;letter-spacing:0.5px;text-align:center;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:8px;transition:all 0.2s;font-family:'Montserrat',sans-serif;}
 .btn:active{transform:scale(0.97);}
 .btn-finish{background:var(--sv-black);color:#fff;width:100%;margin-top:16px;padding:18px;font-size:15px;}
 
@@ -144,13 +148,13 @@ body.loading .wrap{display:none;}
 .modal-title{font-size:20px;font-weight:800;color:var(--sv-black);margin-bottom:6px;}
 .modal-sub{font-size:13px;color:var(--muted);margin-bottom:24px;line-height:1.5;}
 .modal-share-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px;}
-.modal-btn{padding:16px 12px;border-radius:12px;font-size:14px;font-weight:700;border:none;cursor:pointer;text-decoration:none;display:flex;flex-direction:column;align-items:center;gap:6px;transition:all 0.2s;font-family:'DM Sans',sans-serif;}
+.modal-btn{padding:16px 12px;border-radius:12px;font-size:14px;font-weight:700;border:none;cursor:pointer;text-decoration:none;display:flex;flex-direction:column;align-items:center;gap:6px;transition:all 0.2s;font-family:'Montserrat',sans-serif;}
 .modal-btn:active{transform:scale(0.96);}
 .modal-btn-wpp{background:#e9faf0;color:var(--wpp-dark);}
 .modal-btn-email{background:#f0f0f5;color:var(--sv-black);}
 .modal-btn-icon{font-size:26px;}
 .modal-btn-label{font-size:11px;text-transform:uppercase;letter-spacing:0.5px;font-family:'Space Mono',monospace;}
-.modal-close{width:100%;padding:13px;border-radius:10px;border:1.5px solid var(--border);background:transparent;font-size:13px;font-weight:700;color:var(--muted);cursor:pointer;font-family:'DM Sans',sans-serif;transition:0.2s;}
+.modal-close{width:100%;padding:13px;border-radius:10px;border:1.5px solid var(--border);background:transparent;font-size:13px;font-weight:700;color:var(--muted);cursor:pointer;font-family:'Montserrat',sans-serif;transition:0.2s;}
 
 .horario-badge { background:linear-gradient(135deg,#1a3c34,#0d2b22); border:1.5px solid var(--sv-green); border-radius:10px; padding:12px 16px; margin-bottom:16px; display:flex; align-items:center; gap:10px; }
 
